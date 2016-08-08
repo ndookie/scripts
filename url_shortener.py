@@ -20,27 +20,26 @@ def insert_url(url):
 
 	cur.execute("SELECT id FROM url_table WHERE url='%s'" % (url));
 
-	url_id = cur.fetchone()
+	url_id = cur.fetchall()
 
-	return url_id
+	url_id = url_id[-1]
+
+	return url_id[0]
 
 def generate_hash(id):
-	new_hash = base_conversion(id[0],62)
+	new_hash = base_conversion(id,62)
 
 	return new_hash
 
 def update_shortened_url(id, hash):
-	print id
 	cur.execute("UPDATE url_table SET shortened_url='" + hash + "' WHERE id=%i" % (id));
 
 	con.commit()
 
 def url_generator(url):
 	new_id = insert_url(url)
-	#print new_id
 
 	shortened_url = generate_hash(new_id)
-	print new_id
 	update_shortened_url(new_id, shortened_url)
 
 	con.close()
