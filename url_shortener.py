@@ -36,6 +36,10 @@ def update_shortened_url(id, hash):
 
 	con.commit()
 
+def url_fetcher(hash) {
+	# need to write this, include changing to base 10
+}
+
 def url_generator(url):
 	new_id = insert_url(url)
 
